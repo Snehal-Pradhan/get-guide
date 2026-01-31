@@ -4,6 +4,7 @@ import { defineConfig } from 'vitepress'
 export default defineConfig({
   title: "Building GetGuide",
   description: "Documented the architectural choices and code used to build GetGuide!",
+  appearance: 'dark',
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
     siteTitle: false,
