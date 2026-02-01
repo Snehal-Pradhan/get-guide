@@ -1,61 +1,37 @@
 # Auth Service
 
-## Why Use Clerk?
+## Why used clerk ?
 
-We wanted to spend most of our time building features and not worrying about authentication. So we decided to use **Clerk**.
+We wanted to spend most of the time building features and not worrying about authentication. So we thought of using **Clerk**.
 
-In the future, we might use **Better Auth**.
+In future we might use **Better Auth**.
 
 ## Clerk Workflow
 
-### Simple System
+### In case of a simple system
 
-For a simple client–server–database system, the workflow looks like this:
+like a client-server-db system the workflow looks similar to this.
 
-![Clerk Auth Workflow](/auth1.jpeg)
+In a microservice architecture, the primary goal is centralized security and decoupling authentication logic from individual services.
 
-The client sends a session token with every request, and Clerk’s backend middleware verifies it using the secret key to handle authentication.
+API Gateway (e.g., Kong): This is the single entry point that intercepts all external traffic. It is responsible for authenticating users by verifying their Clerk session tokens (JWTs) and deciding whether to allow a request through.
 
-### Problem with Microservices
+The services reside in a private network, hidden behind the gateway. They focus solely on business logic, trusting that any request reaching them is already authenticated and authorized.
 
-There is an issue when we have a microservice architecture.
+## Flow of auth
 
-We cannot just use the secret token to authenticate users in other services, because:
+Client sends JWT: The client sends the Clerk session token in the authorization header to the API Gateway.
+Gateway Verification: The API Gateway verifies the JWT's signature and expiration using Clerk's public keys.
+Identity Propagation: Upon successful verification, the gateway extracts the user ID
+from the token and injects it into a new, internal HTTP header (e.g., X-User-Id).
+Internal Communication: The request is forwarded to the appropriate microservice using the internal
 
-- The secret key is not available in other services
-- We do not want Clerk middleware running in every service
+### 1. Client Sends JWT
 
-So, we use a **JWT token** to authenticate users in other services.
+The client sends the Clerk session token in the authorization header to the API Gateway.
 
-## Microservice Architecture
-
-In a microservice architecture, the main goal is centralized security and decoupling authentication logic from individual services.
-
-### API Gateway (Kong)
-
-This is the single entry point that intercepts all external traffic.
-
-It is responsible for:
-
-- Authenticating users & Verifying Clerk session tokens (JWTs)
-
-### Internal Services
-
-The services run in a private network behind the gateway.
-
-They:
-
-- Focus only on business logic
-- Do not handle authentication themselves
+ervice to service > communication.
 
 ---
 
-## Auth Flow
-
-> clerk secret token → extract clerkId → create new JWT → use this JWT internally
-
-![Auth Flow](/auth2.jpeg)
-
-## Future Plan
-
-Later, we plan to use mTLS for service-to-service communication.
+If you want, I can next help you convert this into a clean Markdown/PDF-ready version or add diagrams without changing your wording.

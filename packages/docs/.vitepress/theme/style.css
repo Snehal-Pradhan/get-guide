@@ -1,12 +1,5 @@
 :root {
-  /* Primary Brand Color - Darker Green for Light Mode (Emerald 600/500) */
-  --vp-c-brand-1: #059669;
-  --vp-c-brand-2: #10b981;
-  --vp-c-brand-3: #34d399;
-}
-
-.dark {
-  /* Primary Brand Color - Vibrant Green for Dark Mode (Emerald 500/400) */
+  /* Primary Brand Color - Greenish (Emerald) */
   --vp-c-brand-1: #10b981;
   --vp-c-brand-2: #34d399;
   --vp-c-brand-3: #6ee7b7;
@@ -15,4 +8,14 @@
   --vp-c-bg: #18181b;
   --vp-c-bg-alt: #09090b; /* Zinc 950 */
   --vp-c-bg-elv: #27272a; /* Zinc 800 */
+
+  /* Text Colors for Dark Background */
+  --vp-c-text-1: rgba(255, 255, 255, 0.87);
+  --vp-c-text-2: rgba(255, 255, 255, 0.60);
+}
+
+.dark {
+  --vp-c-bg: #18181b;
+  --vp-c-bg-alt: #09090b;
+  --vp-c-bg-elv: #27272a;
 }
